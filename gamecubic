@@ -1,0 +1,127 @@
+Public Class Form21
+    Public x1 As Integer = 6
+    Public y1 As Integer = 19
+    Public x2 As Integer = 6
+    Public y2 As Integer = 109
+    Public x3 As Integer = 109
+    Public y3 As Integer = 109
+    Public x4 As Integer = 109
+    Public y4 As Integer = 19
+    Public noe As Integer = 0
+    Public exi As Integer = 0
+    Public xr, yr As Integer
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+        cek_existbutton(1)
+    End Sub
+    Sub cek_existbutton(a As Integer)
+        Dim buttons As Button() = New Button() {Button1, Button2, Button3, Button4}
+        For i = 0 To 3
+            If buttons(i).Text <> "" And i <> a Then
+                If buttons(i).Location.Y < buttons(a).Location.Y And buttons(i).Location.X = buttons(a).Location.X Then
+                    MsgBox("Top Exist" + buttons(i).Text)
+                Else
+                    If buttons(i).Location.X > buttons(a).Location.X And buttons(i).Location.Y = buttons(a).Location.Y Then
+                        MsgBox("Right Exist" + buttons(i).Text)
+                    Else
+                        If buttons(i).Location.X < buttons(a).Location.X And buttons(i).Location.Y = buttons(a).Location.Y Then
+                            MsgBox("Left Exist" + buttons(i).Text)
+                        Else
+                            If buttons(i).Location.Y > buttons(a).Location.Y And buttons(i).Location.X = buttons(a).Location.X Then
+                                MsgBox("Bottom Exist" + buttons(i).Text)
+                            Else
+                                MsgBox("No Exist" + buttons(i).Text)
+                                'cek_noexistbutton(a)
+                                'MsgBox("Could not Move")
+                                noe = 1
+                            End If
+                        End If
+                    End If
+                End If
+            End If
+        Next
+        If noe = 1 Then
+            cek_noexistbutton(a)
+        Else
+            MsgBox("Could not Move")
+        End If
+    End Sub
+    Sub cek_noexistbutton(b As Integer)
+        Dim buttons As Button() = New Button() {Button1, Button2, Button3, Button4}
+        For i = 0 To 3
+            If buttons(i).Text = "" Then
+                If buttons(i).Location.Y < buttons(b).Location.Y And buttons(i).Location.X = buttons(b).Location.X Then
+                    exi = 1
+                    MsgBox("Top Exist" + exi.ToString)
+                    movebutton(i, b)
+                Else
+                    If buttons(i).Location.X > buttons(b).Location.X And buttons(i).Location.Y = buttons(b).Location.Y Then
+                        exi = 1
+                        MsgBox("Right Exist" + exi.ToString)
+                        movebutton(i, b)
+                    Else
+                        If buttons(i).Location.X < buttons(b).Location.X And buttons(i).Location.Y = buttons(b).Location.Y Then
+                            MsgBox("Left Exist" + buttons(i).Text)
+                            exi = 1
+                            MsgBox("Left Exist" + exi.ToString)
+                            movebutton(i, b)
+                        Else
+                            If buttons(i).Location.Y > buttons(b).Location.Y And buttons(i).Location.X = buttons(b).Location.X Then
+                                MsgBox("Bottom Exist" + buttons(i).Text)
+                                exi = 1
+                                MsgBox("Bottom Exist" + exi.ToString)
+                                movebutton(i, b)
+                            Else
+                                'cek_noexistbutton(i, a)
+                                exi = 1
+                                MsgBox("Could Not Move")
+                                'movebutton(i, b)
+                                'noe = 1
+                            End If
+                        End If
+                    End If
+                End If
+            End If
+        Next
+    End Sub
+    Sub movebutton(num As Integer, num1 As Integer)
+        Dim buttons As Button() = New Button() {Button1, Button2, Button3, Button4}
+        Dim x0, y0, x1, y1 As Integer
+        'cek posisi awal button
+        x0 = buttons(num).Location.X
+        y0 = buttons(num).Location.Y
+        x1 = buttons(num1).Location.X
+        y1 = buttons(num1).Location.Y
+        buttons(num1).Location = New Point(x0, y0)
+        buttons(num).Location = New Point(x1, y1)
+    End Sub
+    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
+        cek_existbutton(2)
+    End Sub
+
+    Public cekempty1, cekempty2, cekempty3, cekempty4, pojok1, pojok2, pojok3, pojok4 As Boolean
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        cek_existbutton(0)
+    End Sub
+
+    Private Sub Form21_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Button1.Location = New Point(x1, y1)
+        Button2.Location = New Point(x2, y2)
+        Button3.Location = New Point(x3, y3)
+        Button4.Location = New Point(x4, y4)
+    End Sub
+    Sub random_button()
+
+    End Sub
+End Class
+
+Module Cek_Empty
+    Sub cek_top()
+
+    End Sub
+    Sub cek_right()
+
+    End Sub
+    Sub cek_left()
+
+    End Sub
+End Module
